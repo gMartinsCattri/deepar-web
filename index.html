@@ -124,12 +124,7 @@
 
     <div class="effect-carousel">
       <div><img class="thumb" src="thumbs/viking.png"></div>
-      <div><img class="thumb" src="thumbs/makeup.png"></div>
-      <div><img class="thumb" src="thumbs/makeup-split.png"></div>
       <div><img class="thumb" src="thumbs/stallone.png"></div>
-      <div><img class="thumb" src="thumbs/flower_face.png"></div>
-      <div><img class="thumb" src="thumbs/galaxy.png"></div>
-      <div><img class="thumb" src="thumbs/humanoid.png"></div>
       <div><img class="thumb" src="thumbs/devil_horns.png"></div>
       <div><img class="thumb" src="thumbs/ping_pong.png"></div>
       <div><img class="thumb" src="thumbs/pixel_hearts.png"></div>
@@ -137,7 +132,6 @@
       <div><img class="thumb" src="thumbs/hope.png"></div>
       <div><img class="thumb" src="thumbs/vendetta.png"></div>
       <div><img class="thumb" src="thumbs/fire.png"></div>
-      <div><img class="thumb" src="thumbs/elephant_trunk.png"></div>
     
     </div>
 
@@ -160,7 +154,7 @@
       canvas.height = canvasHeight;
 
       var deepAR = new DeepAR({ 
-        licenseKey: 'your_license_key_here',
+        licenseKey: 'ba2fa173d55c0113189bed5b3a0c1fd5a5ae576437458efc241c63070be3a128bffe401ab3b01be1',
         canvas: canvas,
         segmentationConfig: {
           modelPath: "lib/models/segmentation/segmentation-160x160-opt.bin"
@@ -179,7 +173,7 @@
 
           // or we can setup the video element externally and call deepAR.setVideoElement (see startExternalVideo function below)
 
-          deepAR.switchEffect(0, 'slot',  './effects/viking_helmet.deepar', function() {
+          deepAR.switchEffect(0, 'slot',  './effects/Neon_Devil_Horns.deepar', function() {
             // effect loaded
           });
         }
@@ -314,12 +308,7 @@
 
         var effects = [
             './effects/viking_helmet.deepar',
-            './effects/MakeupLook.deepar',
-            './effects/Split_View_Look.deepar',
             './effects/Stallone.deepar',
-            './effects/flower_face.deepar',
-            './effects/galaxy_background_web.deepar',
-            './effects/Humanoid.deepar',
             './effects/Neon_Devil_Horns.deepar',
             './effects/Ping_Pong.deepar',
             './effects/Pixel_Hearts.deepar',
@@ -327,11 +316,10 @@
             './effects/Hope.deepar',
             './effects/Vendetta_Mask.deepar',
             './effects/Fire_Effect.deepar',
-            './effects/Elephant_Trunk.deepar'
         ];
 
         $('.effect-carousel').on('afterChange', function(event, slick, currentSlide){
-          deepAR.switchEffect(0, 'slot', effects[currentSlide]);
+          deepAR.switchEffect(4, 'slot', effects[currentSlide]);
         });
 
       });      
