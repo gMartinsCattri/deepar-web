@@ -8,16 +8,16 @@
     <style>
 
       canvas.deepar { 
-        width: 1800px;
-  height: 3100px;
-  border-radius: 70px;
-  border: 10px solid #caf9e970;
-  background-color: #00000011;
-  display: flex;
-  margin-top: 200px;
-  margin-bottom: auto;
-  margin-inline: auto;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        border-radius: 70px;
+        width: 1500px;
+        height: 2500px;
+        border: 10px solid #caf9e970;
+        background-color: rgba(0, 0, 0, 0); 
+        display: block; 
+        margin-top: 200px;
+        margin-bottom: auto;
+        margin-inline: auto;
+        -webkit-tap-highlight-color: rgba(0,0,0,0);
       }
 
       body {
@@ -75,10 +75,10 @@
       .effect-carousel {
         position: fixed !important;
         width: 100%;
-        height: 100px;
-        bottom: 0px;
+        height: 300px;
+        bottom: 1700px;
         z-index: 999999;
-        background-color: rgba(255, 255, 255, 0.7);
+        background-color: rgba(255, 255, 255, 0);
       }
 
       .thumb {
@@ -87,9 +87,10 @@
         margin-right: auto;
         margin-left: auto;
         position: relative;
-        opacity: 0.8;
-        transition: all 300ms ease;
-        height: 70px;
+        opacity: 1;
+        transition: all 400ms ease;
+        height: 100px;
+        width: 100px;
       }
 
       .slick-center .thumb {
@@ -99,36 +100,38 @@
         -webkit-transform: scale(1.3);
         color: #e67e22;
         opacity: 1;
-        transform: scale(1.3);
+        transform: scale(1.5);
       }
       .slick-slide {
         width: 130px;
       }
 
-      #boton-save {
-        position: fixed;
-        top: 0px;
-        left: 0px;
-        width: 200px;
-        height: 80px;
-        z-index: 99999;
+      .boton-save {
+       
+        width: 400px;
+        height: 280px;
+        border-radius: 40px;
+        font-size: 60px;
+        margin-top: -500px;
+        margin-left: 400px;
+        margin-bottom: auto;
+        margin-inline-start: 500px;
+        border-color: rgba(0, 0, 0, 0.393);
+        border: 10px solid #0b1b16b4;
+        background-color: rgba(252, 251, 251, 0.747);
       }
-
-      
 
     </style>
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
 
   </head>
   <body>
-
-    <button id="download-photo" class="boton-save" display="none">Guardar</button>
-
+<div>
     <canvas class="deepar" id="deepar-canvas" width="1280" height="720" oncontextmenu="event.preventDefault()"></canvas>
     <div id="loader-wrapper">
     <span class="loader"></span></span>
     </div>
-
+    <button id="download-photo" class="boton-save" display="none">Guardar</button>
     <div class="effect-carousel">
       <div><img class="thumb" src="thumbs/viking.png"></div>
       <div><img class="thumb" src="thumbs/stallone.png"></div>
@@ -141,6 +144,9 @@
       <div><img class="thumb" src="thumbs/fire.png"></div>
     
     </div>
+</div>
+
+    
 
 
     <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
@@ -239,66 +245,6 @@
 
       deepAR.downloadFaceTrackingModel('lib/models/face/models-68-extreme.bin');
 
-      // Store video objects for cleanup
-      var videoObjects = {};
-
-      function startExternalVideo() {
-        cleanupVideoObjects();
-        // create video element
-        var video = document.createElement('video');
-        video.muted = true;
-        video.loop = true;
-        video.controls = true;
-        video.setAttribute('playsinline', 'playsinline');
-        video.style.width = '100%';
-        video.style.height = '100%';
-
-        // put it somewhere in the DOM
-        var videoContainer = document.createElement('div');
-        videoContainer.appendChild(video);
-        videoContainer.style.width = '1px';
-        videoContainer.style.height = '1px';
-        videoContainer.style.position = 'absolute';
-        videoContainer.style.top = '0px';
-        videoContainer.style.left = '0px';
-        videoContainer.style['z-index'] = '-1';
-        document.body.appendChild(videoContainer);
-  
-        videoObjects.videoContainer = videoContainer;
-        videoObjects.video = video;
-          
-        navigator.mediaDevices.getUserMedia({video: true}).then(function(stream) {
-          try {
-            video.srcObject = stream;
-          } catch (error) {
-            video.src = URL.createObjectURL(stream);
-          }
-          setTimeout(function() {
-            video.play();
-          }, 50);
-        }).catch(function(error) {
-            console.log('error in video play:', error);
-        });
-
-        // tell the DeepAR SDK about our new video element
-        deepAR.setVideoElement(video, true);
-          
-        var loaderWrapper = document.getElementById('loader-wrapper');
-        loaderWrapper.style.display = 'none';
-      }
-
-      function cleanupVideoObjects() {
-        if (videoObjects.length > 0){  
-            videoObjects.videoContainer.parentNode.removeChild(videoObjects.videoContainer);
-            videoObjects.videoContainer = null;
-            if (videoObjects.video.srcObject) {
-              //getUserMedia starts a stream, all tracks on all streams need to be stoppedbefore calling getUserMedia again
-              videoObjects.video.srcObject.getTracks().forEach(track => track.stop())
-            }
-            videoObjects.video.pause();
-            videoObjects = {};
-        }
-      }
 
       // Position the carousel to cover the canvas
       if (window.innerWidth > window.innerHeight) {
