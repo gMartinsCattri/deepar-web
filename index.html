@@ -8,11 +8,16 @@
     <style>
 
       canvas.deepar { 
-        border: 0px none; 
-        background-color: black; 
-        display: block; 
-        margin: auto; 
-        -webkit-tap-highlight-color: rgba(0,0,0,0);
+        width: 1800px;
+  height: 3100px;
+  border-radius: 70px;
+  border: 10px solid #caf9e970;
+  background-color: #00000011;
+  display: flex;
+  margin-top: 200px;
+  margin-bottom: auto;
+  margin-inline: auto;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
       }
 
       body {
@@ -173,7 +178,7 @@
 
           // or we can setup the video element externally and call deepAR.setVideoElement (see startExternalVideo function below)
 
-          deepAR.switchEffect(0, 'slot',  './effects/Neon_Devil_Horns.deepar', function() {
+          deepAR.switchEffect(0, 'slot',  './effects/viking_helmet.deepar', function() {
             // effect loaded
           });
         }
@@ -319,7 +324,7 @@
         ];
 
         $('.effect-carousel').on('afterChange', function(event, slick, currentSlide){
-          deepAR.switchEffect(4, 'slot', effects[currentSlide]);
+          deepAR.switchEffect(0, 'slot', effects[currentSlide]);
         });
 
       });      
