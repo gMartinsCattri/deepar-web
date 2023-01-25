@@ -1,4 +1,4 @@
-let imageScreenShoot = null;
+
 const urlDns = "https://alfred.to";
 
 const vikingBtn = document.getElementById("filterViking");
@@ -108,9 +108,10 @@ if (window.innerWidth > window.innerHeight) {
 }
 
 //---- SCREENSHOT
-
+let imageScreenShoot = null;
 deepAR.callbacks.onScreenshotTaken = function (photo) {
   console.log("photo screenshot", photo);
+  
   var a = document.createElement("a");
   a.href = photo;
   a.setAttribute("id", "Div1");
@@ -118,12 +119,16 @@ deepAR.callbacks.onScreenshotTaken = function (photo) {
   document.body.appendChild(a);
   a.click();
   console.log(photo);
-  imageScreenShoot = photo;
+  imageScreenShoot = photo
   deepAR.resume();
+  qrDisplayed()
+ 
 };
 
-function handleScreenshot() {
-  if (imageScreenShoot !== null) {
+function qrDisplayed (){
+if (imageScreenShoot !== null) {
+    console.log('imageScreenShoot after cvallback', imageScreenShoot)
+
     const requestOptions = {
       method: "POST",
       headers: {
@@ -143,7 +148,13 @@ function handleScreenshot() {
         document.querySelector("#img").src = imageURL;
       });
   }
+
 }
+
+
+
+  
+
 
 //---- CODE SCREENSHOT
 
@@ -195,16 +206,7 @@ $(document).ready(function () {
 
   //VIKING FILTER
 
-  //MAKEUP FILTER
-  makeupBtn.addEventListener("click", () => {
-    const effect = effects[1];
-    hideFilterCarousel();
-    console.log("vikins click");
-    fotoTimerMessage();
-    hideDowloadPhoto();
-    backtoFiltersBack();
-    deepAR.switchEffect(0, "slot", effect);
-  });
+
   //STALLONE FILTER
 
   //PING-PONG FILTER
@@ -212,27 +214,8 @@ $(document).ready(function () {
   //HEARTS FILTER
 
   //SNAIL FILTER
-  snailBtn.addEventListener("click", () => {
-    const effect = effects[5];
-    hideFilterCarousel();
-    console.log("vikins click");
-    fotoTimerMessage();
-    hideDowloadPhoto();
-    backtoFiltersBack();
-    deepAR.switchEffect(0, "slot", effect);
-  });
-  //HOPE FILTER
 
-  function some() {
-    console.log("vikins click");
-    const effect = effects[2];
-    hideFilterCarousel();
-
-    fotoTimerMessage();
-    hideDowloadPhoto();
-    backtoFiltersBack();
-    deepAR.switchEffect(0, "slot", effect);
-  }
+ 
   //VENDETTA FILTER
 
   //FIRE FILTER
