@@ -89,7 +89,7 @@ function applyEffect(index) {
       }
       
     //---- SCREENSHOT
-        let setImageScreenShoot = 
+      
     deepAR.callbacks.onScreenshotTaken = function (photo) {
       console.log("photo screenshot", photo);
       var a = document.createElement("a");
@@ -102,16 +102,15 @@ function applyEffect(index) {
       setImageScreenShoot(photo);
       deepAR.resume();
     };
-    console.log("photo screenshot", setImageScreenShoot)
 
     //---- CODE SCREENSHOT
     
     document.getElementById("download-photo").onclick = function () {
-      setTimeout(() => {
+     
         deepAR.takeScreenshot();
         qrImgDonwload.style.display = "block";
         deepAR.resume();
-      }, 100);
+     
     };
 
       $(document).ready(function() {
