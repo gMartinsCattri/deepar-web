@@ -109,7 +109,7 @@
       }
 
       .buttonFilter{
-         height: 100%;
+         height: 300px;
          width: 100%;
         background-color: transparent;
         border: none; 
@@ -169,52 +169,52 @@
     <div class="slideContainer">
     <div class="effect-carousel">
       <div class="item">
-        <button class="buttonFilter" id="filterViking">
+        <button class="buttonFilter" onclick="applyEffect(0)"  id="filterViking">
           <img class="thumb" src="thumbs/viking.png">
         </button>
       </div>
       <div class="item">
-        <button class="buttonFilter" id="filterStalone">
+        <button class="buttonFilter" onclick="applyEffect(1)" id="filterStalone">
           <img class="thumb" src="thumbs/stallone.png">
         </button>
       </div>
       <div class="item">
-        <button class="buttonFilter" id="filterOscares">
+        <button class="buttonFilter" onclick="applyEffect(3)"id="filterOscares">
           <img class="thumb" src="thumbs/oscares.png">
         </button>
       </div>
       <div class="item">
-        <button class="buttonFilter" id="filterDevil">
+        <button class="buttonFilter" onclick="applyEffect(4)" id="filterDevil">
           <img class="thumb" src="thumbs/devil_horns.png">
         </button>
       </div>
       <div class="item">
-        <button class="buttonFilter" id="filterPingPong">
+        <button class="buttonFilter" onclick="applyEffect(2)"id="filterPingPong">
           <img class="thumb" src="thumbs/ping_pong.png">
         </button>
       </div>
       <div class="item">
-        <button class="buttonFilter" id="filterHearts">
+        <button class="buttonFilter" onclick="applyEffect(5)" id="filterHearts">
           <img class="thumb" src="thumbs/pixel_hearts.png">
         </button>
       </div>
       <div class="item">
-        <button class="buttonFilter" id="filterHope">
+        <button class="buttonFilter" onclick="applyEffect(6)" id="filterHope">
           <img class="thumb" src="thumbs/hope.png">
         </button>
       </div>
       <div class="item">
-        <button class="buttonFilter" id="filterSanta">
+        <button class="buttonFilter" onclick="applyEffect(7)" id="filterSanta">
           <img class="thumb" src="thumbs/santa.png">
         </button>
       </div>
       <div class="item">
-        <button class="buttonFilter" id="filterVendetta">
+        <button class="buttonFilter" onclick="applyEffect(8)" id="filterVendetta">
           <img class="thumb" src="thumbs/vendetta.png">
         </button>
       </div>
       <div class="item">
-        <button class="buttonFilter" id="filterFire">
+        <button class="buttonFilter" onclick="applyEffect(9)" id="filterFire">
           <img class="thumb" src="thumbs/fire.png">
         </button>
       </div>
@@ -232,258 +232,6 @@
     <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
     <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <script type="text/javascript" src="lib/js/deepar.js"></script>
-    <script type="text/javascript">
-
-      var canvasHeight = window.innerHeight;
-      var canvasWidth = window.innerWidth;
-
-      let canvas = document.getElementById('deepar-canvas');
-      canvas.width = canvasWidth;
-      canvas.height = canvasHeight;
-
-      var deepAR = new DeepAR({ 
-        licenseKey: 'your_license_key_goes_here',
-        canvas: canvas,
-        segmentationConfig: {
-          modelPath: "lib/models/segmentation/segmentation-160x160-opt.bin"
-        },
-        footTrackingConfig: {
-          poseEstimationWasmPath: 'lib/wasm/libxzimgPoseEstimation.wasm',
-          detectorPath: 'lib/models/foot/foot-detector-android.bin', // or ...-ios.bin
-          trackerPath: 'lib/models/foot/foot-tracker-android.bin',  // or ...-ios.bin
-          objPath: 'lib/models/foot/foot-model.obj',
-        },
-        deeparWasmPath: 'lib/wasm/deepar.wasm',
-        callbacks: {
-          onInitialize: function() {
-          // start video immediately after the initalization, mirror = true
-          deepAR.startVideo(true);
-
-          // or we can setup the video element externally and call deepAR.setVideoElement (see startExternalVideo function below)
-          deepAR.switchEffect(0, 'slot', './effects/Neon_Devil_Horns.deepar', function() {
-            // effect loaded
-          });
-        }
-        }
-      });
-
-      deepAR.callbacks.onCameraPermissionAsked = function() {
-        console.log('camera permission asked');
-      };
-
-      deepAR.callbacks.onCameraPermissionGranted = function() {
-        console.log('camera permission granted');
-      };
-
-      deepAR.callbacks.onCameraPermissionDenied = function() {
-        console.log('camera permission denied');
-      };
-      
-      deepAR.setFps(30);
-      deepAR.setFaceDetectionSensitivity(3);
-
-      deepAR.downloadFaceTrackingModel('lib/models/face/models-68-extreme.bin');
-
-      deepAR.callbacks.onImageVisibilityChanged = function(visible) {
-        console.log('image visible', visible);
-      };
-
-      deepAR.callbacks.onFaceVisibilityChanged = function(visible) {
-        console.log('face visible', visible);
-      };
-
-      deepAR.callbacks.onVideoStarted = function() {
-        var loaderWrapper = document.getElementById('loader-wrapper');
-        loaderWrapper.style.display = 'none';
-      };
-
-    //---- Position the carousel to cover the canvas
-
-      if (window.innerWidth > window.innerHeight) {
-        var width = Math.floor(window.innerHeight*0.66);
-        var carousel = document.getElementsByClassName('effect-carousel')[0];
-        carousel.style.width = width + 'px';
-      }
-      
-    //---- SCREENSHOT
-        
-    deepAR.callbacks.onScreenshotTaken = function (photo) {
-      console.log("photo screenshot", photo);
-      var a = document.createElement("a");
-      a.href = photo;
-      a.setAttribute("id", "Div1");
-      a.download = "photo.png";
-      document.body.appendChild(a);
-      a.click();
-      console.log(photo);
-      setImageScreenShoot(photo);
-      deepAR.resume();
-    };
-
-    //---- CODE SCREENSHOT
-    
-    document.getElementById("download-photo").onclick = function () {
-      setTimeout(() => {
-        deepAR.takeScreenshot();
-        qrImgDonwload.style.display = "block";
-        deepAR.resume();
-      }, 100);
-    };
-
-      $(document).ready(function() {
-        $('.effect-carousel').slick({
-          slidesToShow: 1,
-          centerMode: true,
-          focusOnSelect: true,
-          arrows: false,
-          accessibility: true,
-          variableWidth: true,
-          infinite: true,
-          touchMove: true,
-        });
-
-        var effects = [
-            './effects/viking_helmet.deepar',
-            './effects/Stallone.deepar',
-            './effects/Oscar.deepar',
-            './effects/Neon_Devil_Horns.deepar',
-            './effects/Ping_Pong.deepar',
-            './effects/Pixel_Hearts.deepar',
-            './effects/Hope.deepar',
-            './effects/SantAR.deepar',
-            './effects/Vendetta_Mask.deepar',
-            './effects/Fire_Effect.deepar',
-        ];
-
-        const vikingBtn = document.getElementById("filterViking");
-        const makeupBtn = document.getElementById("filterMakeUp");
-        const staloneBtn = document.getElementById("filterStalone");
-        const pingPongBtn = document.getElementById("filterPingPong");
-        const heartsBtn = document.getElementById("filterHearts");
-        const snailBtn = document.getElementById("filterSnail");
-        const hopeBtn = document.getElementById("filterHope");
-        const vendettaBtn = document.getElementById("filterVendetta");
-        const fireBtn = document.getElementById("filterFire");
-        const devilBtn = document.getElementById("filterDevil");
-        const qrImgDonwload = document.getElementById("img");
-
-
-    function backtoFiltersBack() {
-      backToFilterCarousel.style.display = "block";
-    }
-
-    const dowloadPhoto = document.getElementById("download-photo");
-    function hideDowloadPhoto() {
-      dowloadPhoto.style.display = "block";
-    }
-
-    const filterCarousel = document.getElementById("filterCarousel");
-    function hideFilterCarousel() {
-      filterCarousel.style.display = "none";
-    }
-
-    const backToFilterCarousel = document.getElementById("back-to-filters");
-    function backToFilters() {
-      filterCarousel.style.display = "block";
-      messageFotoTimer.style.display = "none";
-      dowloadPhoto.style.display = "none";
-      backToFilterCarousel.style.display = "none";
-      qrImgDonwload.style.display = "none";
-    }
-    backToFilterCarousel.addEventListener("click", backToFilters);
-    
-    //VIKING FILTER
-    vikingBtn.addEventListener("click", () => {
-      const effect = effects[0];
-      hideFilterCarousel();
-      fotoTimerMessage();
-      hideDowloadPhoto();
-      backtoFiltersBack();
-      deepAR.switchEffect(0, "slot", effect);
-    });
-    //MAKEUP FILTER
-    makeupBtn.addEventListener("click", () => {
-      const effect = effects[1];
-      hideFilterCarousel();
-      fotoTimerMessage();
-      hideDowloadPhoto();
-      backtoFiltersBack();
-      deepAR.switchEffect(0, "slot", effect);
-    });
-    //STALLONE FILTER
-    staloneBtn.addEventListener("click", () => {
-      const effect = effects[2];
-      hideFilterCarousel();
-      fotoTimerMessage();
-      hideDowloadPhoto();
-      backtoFiltersBack();
-      deepAR.switchEffect(0, "slot", effect);
-    });
-    //PING-PONG FILTER
-    pingPongBtn.addEventListener("click", () => {
-      const effect = effects[3];
-      hideFilterCarousel();
-      fotoTimerMessage();
-      hideDowloadPhoto();
-      backtoFiltersBack();
-      deepAR.switchEffect(0, "slot", effect);
-    });
-    //HEARTS FILTER
-    heartsBtn.addEventListener("click", () => {
-      const effect = effects[4];
-      hideFilterCarousel();
-      fotoTimerMessage();
-      hideDowloadPhoto();
-      backtoFiltersBack();
-      deepAR.switchEffect(0, "slot", effect);
-    });
-    //SNAIL FILTER
-    snailBtn.addEventListener("click", () => {
-      const effect = effects[5];
-      hideFilterCarousel();
-      fotoTimerMessage();
-      hideDowloadPhoto();
-      backtoFiltersBack();
-      deepAR.switchEffect(0, "slot", effect);
-    });
-    //HOPE FILTER
-    hopeBtn.addEventListener("click", () => {
-      const effect = effects[6];
-      hideFilterCarousel();
-      fotoTimerMessage();
-      hideDowloadPhoto();
-      backtoFiltersBack();
-      deepAR.switchEffect(0, "slot", effect);
-    });
-    //VENDETTA FILTER
-    vendettaBtn.addEventListener("click", () => {
-      const effect = effects[7];
-      hideFilterCarousel();
-      fotoTimerMessage();
-      hideDowloadPhoto();
-      backtoFiltersBack();
-      deepAR.switchEffect(0, "slot", effect);
-    });
-    //FIRE FILTER
-    fireBtn.addEventListener("click", () => {
-      const effect = effects[8];
-      hideFilterCarousel();
-      fotoTimerMessage();
-      hideDowloadPhoto();
-      backtoFiltersBack();
-      deepAR.switchEffect(0, "slot", effect);
-    });
-    //DEVIL HORNS FILTER
-    devilBtn.addEventListener("click", () => {
-      const effect = effects[9];
-      hideFilterCarousel();
-      fotoTimerMessage();
-      hideDowloadPhoto();
-      backtoFiltersBack();
-      deepAR.switchEffect(0, "slot", effect);
-    });
-
-      });      
-    </script>
+    <script src="./index.js"></script>
   </body>
 </html>
