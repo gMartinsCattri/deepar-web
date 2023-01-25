@@ -109,6 +109,25 @@
         height: 400px;
       }
 
+      .buttonFilter{
+         height: 300px;
+         width: 100%;
+        background-color: transparent;
+        border: none; 
+      }
+
+      #back-to-filters{
+         background-color: transparent !important;
+         background: url(img/blue-candy.png);
+         width: 150px;
+         height: 200px;
+         display: none;
+         font: 140px;
+         color: white;
+         border: none;
+     } 
+
+     
     .boton-save {
         width: 500px;
         height: 280px;
@@ -166,17 +185,56 @@
     </div>
     <div class="slideContainer">
     <div class="effect-carousel">
-      <div><img class="thumb" src="thumbs/viking.png"></div>
-      <div><img class="thumb" src="thumbs/stallone.png"></div>
-      <div><img class="thumb" src="thumbs/oscares.png"></div>
-      <div><img class="thumb" src="thumbs/devil_horns.png"></div>
-      <div><img class="thumb" src="thumbs/ping_pong.png"></div>
-      <div><img class="thumb" src="thumbs/pixel_hearts.png"></div>
-      <div><img class="thumb" src="thumbs/snail.png"></div>
-      <div><img class="thumb" src="thumbs/hope.png"></div>
-      <div><img class="thumb" src="thumbs/santa.png"></div>
-      <div><img class="thumb" src="thumbs/vendetta.png"></div>
-      <div><img class="thumb" src="thumbs/fire.png"></div>
+      <div class="item">
+        <button class="buttonFilter" onclick="applyEffect(0)"  id="filterViking">
+          <img class="thumb" src="thumbs/viking.png">
+        </button>
+      </div>
+      <div class="item">
+        <button class="buttonFilter" onclick="applyEffect(1)" id="filterStalone">
+          <img class="thumb" src="thumbs/stallone.png">
+        </button>
+      </div>
+      <div class="item">
+        <button class="buttonFilter" onclick="applyEffect(3)"id="filterOscares">
+          <img class="thumb" src="thumbs/oscares.png">
+        </button>
+      </div>
+      <div class="item">
+        <button class="buttonFilter" onclick="applyEffect(4)" id="filterDevil">
+          <img class="thumb" src="thumbs/devil_horns.png">
+        </button>
+      </div>
+      <div class="item">
+        <button class="buttonFilter" onclick="applyEffect(2)"id="filterPingPong">
+          <img class="thumb" src="thumbs/ping_pong.png">
+        </button>
+      </div>
+      <div class="item">
+        <button class="buttonFilter" onclick="applyEffect(5)" id="filterHearts">
+          <img class="thumb" src="thumbs/pixel_hearts.png">
+        </button>
+      </div>
+      <div class="item">
+        <button class="buttonFilter" onclick="applyEffect(6)" id="filterHope">
+          <img class="thumb" src="thumbs/hope.png">
+        </button>
+      </div>
+      <div class="item">
+        <button class="buttonFilter" onclick="applyEffect(7)" id="filterSanta">
+          <img class="thumb" src="thumbs/santa.png">
+        </button>
+      </div>
+      <div class="item">
+        <button class="buttonFilter" onclick="applyEffect(8)" id="filterVendetta">
+          <img class="thumb" src="thumbs/vendetta.png">
+        </button>
+      </div>
+      <div class="item">
+        <button class="buttonFilter" onclick="applyEffect(9)" id="filterFire">
+          <img class="thumb" src="thumbs/fire.png">
+        </button>
+      </div>
     </div>
    </div> 
     <div class="buttonContainer">
@@ -191,137 +249,6 @@
     <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
     <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <script type="text/javascript" src="lib/js/deepar.js"></script>
-    <script type="text/javascript">
-
-      var canvasHeight = window.innerHeight;
-      var canvasWidth = window.innerWidth;
-
-      let canvas = document.getElementById('deepar-canvas');
-      canvas.width = canvasWidth;
-      canvas.height = canvasHeight;
-
-      var deepAR = new DeepAR({ 
-        licenseKey: 'your_license_key_goes_here',
-        canvas: canvas,
-        segmentationConfig: {
-          modelPath: "lib/models/segmentation/segmentation-160x160-opt.bin"
-        },
-        footTrackingConfig: {
-          poseEstimationWasmPath: 'lib/wasm/libxzimgPoseEstimation.wasm',
-          detectorPath: 'lib/models/foot/foot-detector-android.bin', // or ...-ios.bin
-          trackerPath: 'lib/models/foot/foot-tracker-android.bin',  // or ...-ios.bin
-          objPath: 'lib/models/foot/foot-model.obj',
-        },
-        deeparWasmPath: 'lib/wasm/deepar.wasm',
-        callbacks: {
-          onInitialize: function() {
-          // start video immediately after the initalization, mirror = true
-          deepAR.startVideo(true);
-
-          // or we can setup the video element externally and call deepAR.setVideoElement (see startExternalVideo function below)
-          deepAR.switchEffect(0, 'slot', './effects/Neon_Devil_Horns.deepar', function() {
-            // effect loaded
-          });
-        }
-        }
-      });
-
-      deepAR.callbacks.onCameraPermissionAsked = function() {
-        console.log('camera permission asked');
-      };
-
-      deepAR.callbacks.onCameraPermissionGranted = function() {
-        console.log('camera permission granted');
-      };
-
-      deepAR.callbacks.onCameraPermissionDenied = function() {
-        console.log('camera permission denied');
-      };
-      
-
-      deepAR.setFaceDetectionSensitivity(3);
-      deepAR.setFps(30);
-
-
-      deepAR.callbacks.onImageVisibilityChanged = function(visible) {
-        console.log('image visible', visible);
-      };
-
-      deepAR.callbacks.onFaceVisibilityChanged = function(visible) {
-        console.log('face visible', visible);
-      };
-
-      deepAR.callbacks.onVideoStarted = function() {
-        var loaderWrapper = document.getElementById('loader-wrapper');
-        loaderWrapper.style.display = 'none';
-      };
-
-      deepAR.downloadFaceTrackingModel('lib/models/face/models-68-extreme.bin');
-
-
-      // Position the carousel to cover the canvas
-      if (window.innerWidth > window.innerHeight) {
-        var width = Math.floor(window.innerHeight*0.66);
-        var carousel = document.getElementsByClassName('effect-carousel')[0];
-        carousel.style.width = width + 'px';
-        
-      }
-
-
-      $(document).ready(function() {
-        $('.effect-carousel').slick({
-          slidesToShow: 1,
-          centerMode: true,
-          focusOnSelect: true,
-          arrows: false,
-          accessibility: true,
-          variableWidth: true,
-          infinite: true,
-          touchMove: true,
-        });
-
-        var effects = [
-            './effects/viking_helmet.deepar',
-            './effects/Stallone.deepar',
-            './effects/Oscar.deepar',
-            './effects/Neon_Devil_Horns.deepar',
-            './effects/Ping_Pong.deepar',
-            './effects/Pixel_Hearts.deepar',
-            './effects/Snail.deepar',
-            './effects/Hope.deepar',
-            './effects/SantAR.deepar',
-            './effects/Vendetta_Mask.deepar',
-            './effects/Fire_Effect.deepar',
-        ];
-
-        $('.effect-carousel').on('afterChange', function(event, slick, currentSlide){
-          deepAR.switchEffect(0, 'slot', effects[currentSlide]);
-        });
-
-        
-      deepAR.callbacks.onScreenshotTaken = function (photo) {
-      console.log("photo screenshot", photo);
-      var a = document.createElement("a");
-      a.href = photo;
-      a.setAttribute("id", "Div1");
-      a.download = "photo.png";
-      document.body.appendChild(a);
-      a.click();
-      console.log(photo);
-      setImageScreenShoot(photo);
-      deepAR.resume();
-    };
-
-    //CODE SCREENSHOT
-    document.getElementById("download-photo").onclick = function () {
-      setTimeout(() => {
-        deepAR.takeScreenshot();
-        qrImgDonwload.style.display = "block";
-        deepAR.resume();
-      }, 100);
-    };
-
-      });      
-    </script>
+    <script src="./index.js"></script>
   </body>
 </html>
