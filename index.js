@@ -1,3 +1,41 @@
+let imageScreenShoot = null;
+const urlDns = "https://alfred.to";
+
+const vikingBtn = document.getElementById("filterViking");
+const makeupBtn = document.getElementById("filterMakeUp");
+const staloneBtn = document.getElementById("filterStalone");
+const pingPongBtn = document.getElementById("filterPingPong");
+const heartsBtn = document.getElementById("filterHearts");
+const snailBtn = document.getElementById("filterSnail");
+const hopeBtn = document.getElementById("filterHope");
+const vendettaBtn = document.getElementById("filterVendetta");
+const fireBtn = document.getElementById("filterFire");
+const devilBtn = document.getElementById("filterDevil");
+const qrImgDonwload = document.getElementById("img");
+
+function handleScreenshot() {
+  if (imageScreenShoot !== null) {
+    const requestOptions = {
+      method: "POST",
+      headers: {
+        Authorization:
+          "Basic QWxmcmVkOlREODI0MThZYlBweCpuWDV4WDNrSlRrVFNeRTZndQ==",
+      },
+      body: imageScreenShoot,
+    };
+    fetch(
+      "https://alfred.to/reservas/qr-code/go-to-your-picture",
+      requestOptions
+    )
+      .then((response) => response.blob())
+      .then((data) => {
+        var urlCreator = window.URL || window.webkitURL;
+        var imageURL = urlCreator.createObjectURL(data);
+        document.querySelector("#img").src = imageURL;
+      });
+  }
+}
+
 var effects = [
   "./effects/viking_helmet.deepar",
   "./effects/Stallone.deepar",
@@ -103,16 +141,17 @@ deepAR.callbacks.onScreenshotTaken = function (photo) {
   document.body.appendChild(a);
   a.click();
   console.log(photo);
-  setImageScreenShoot(photo);
+  imageScreenShoot = photo;
   deepAR.resume();
 };
 
 //---- CODE SCREENSHOT
 
 document.getElementById("download-photo").onclick = function () {
-  deepAR.takeScreenshot();
-  qrImgDonwload.style.display = "block";
-  deepAR.resume();
+  setTimeout(() => {
+    deepAR.takeScreenshot();
+    qrImgDonwload.style.display = "block";
+  }, 3000);
 };
 
 $(document).ready(function () {
