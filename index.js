@@ -13,29 +13,6 @@ const fireBtn = document.getElementById("filterFire");
 const devilBtn = document.getElementById("filterDevil");
 const qrImgDonwload = document.getElementById("img");
 
-function handleScreenshot() {
-  if (imageScreenShoot !== null) {
-    const requestOptions = {
-      method: "POST",
-      headers: {
-        Authorization:
-          "Basic QWxmcmVkOlREODI0MThZYlBweCpuWDV4WDNrSlRrVFNeRTZndQ==",
-      },
-      body: imageScreenShoot,
-    };
-    fetch(
-      "https://alfred.to/reservas/qr-code/go-to-your-picture",
-      requestOptions
-    )
-      .then((response) => response.blob())
-      .then((data) => {
-        var urlCreator = window.URL || window.webkitURL;
-        var imageURL = urlCreator.createObjectURL(data);
-        document.querySelector("#img").src = imageURL;
-      });
-  }
-}
-
 var effects = [
   "./effects/viking_helmet.deepar",
   "./effects/Stallone.deepar",
@@ -145,12 +122,36 @@ deepAR.callbacks.onScreenshotTaken = function (photo) {
   deepAR.resume();
 };
 
+function handleScreenshot() {
+  if (imageScreenShoot !== null) {
+    const requestOptions = {
+      method: "POST",
+      headers: {
+        Authorization:
+          "Basic QWxmcmVkOlREODI0MThZYlBweCpuWDV4WDNrSlRrVFNeRTZndQ==",
+      },
+      body: imageScreenShoot,
+    };
+    fetch(
+      "https://alfred.to/reservas/qr-code/go-to-your-picture",
+      requestOptions
+    )
+      .then((response) => response.blob())
+      .then((data) => {
+        var urlCreator = window.URL || window.webkitURL;
+        var imageURL = urlCreator.createObjectURL(data);
+        document.querySelector("#img").src = imageURL;
+      });
+  }
+}
+
 //---- CODE SCREENSHOT
 
 document.getElementById("download-photo").onclick = function () {
   setTimeout(() => {
     deepAR.takeScreenshot();
     qrImgDonwload.style.display = "block";
+    console.log("Foto recibida");
   }, 3000);
 };
 
