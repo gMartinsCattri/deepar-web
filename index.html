@@ -7,18 +7,17 @@
     <title>DeepAR</title>
     <style>
 
-      canvas.deepar { 
+    canvas.deepar { 
         border-radius: 100px;
         width: 80%;
         height: 80%;
         background-color: rgba(0, 0, 0, 0); 
         display: block; 
         margin-inline: auto;
-     
         -webkit-tap-highlight-color: rgba(0,0,0,0);
       }
 
-      body {
+    body {
         margin: 0px;
         padding: 0px;
         height: 4099px;        
@@ -28,7 +27,7 @@
       }
 
 
-      #loader-wrapper {
+    #loader-wrapper {
         position: fixed;
         top: 0px;
         left: 0px;
@@ -38,7 +37,7 @@
         text-align: center;
       }
 
-      .loader {
+    .loader {
 
         display: inline-block;
         position: relative;
@@ -74,7 +73,7 @@
         }
       }
 
-      .effect-carousel {
+    .effect-carousel {
         position: fixed !important;
         width: 100%;
         height: 100%;
@@ -83,7 +82,7 @@
         background-color: rgba(255, 255, 255, 0);
       }
 
-      .thumb {
+    .thumb {
         margin-top: 25px;
         margin-bottom: 25px;
         margin-right: auto;
@@ -95,7 +94,7 @@
         width: 300px;
       }
 
-      .slick-center .thumb {
+    .slick-center .thumb {
         -moz-transform: scale(1.3);
         -ms-transform: scale(1.3);
         -o-transform: scale(1.3);
@@ -104,21 +103,38 @@
         opacity: 1;
         transform: scale(1.3);
       }
-      .slick-slide {
+    .slick-slide {
         width: 330px;
         height: 400px;
       }
 
-      .buttonFilter{
-         height: 300px;
-         width: 100%;
+    .qrContainer{
+        position: absolute;
+        top: 30%;
+        left: 35%;
+        width: 800px;
+        height: 800px;
+        display: block;
+       
+    }
+
+    #qr {
+        height: 700px;
+        width: 700px;
+        display: none;
+        border: 10px;
+    }
+
+    .buttonFilter{
+        height: 300px;
+        width: 100%;
         background-color: transparent;
         border: none; 
       }
 
-      #back-to-filters{
+    #back-to-filters{
          background-color: transparent !important;
-         background: url(img/blue-candy.png);
+         background: url("thumbs/ground.png");
          width: 150px;
          height: 200px;
          display: none;
@@ -127,29 +143,63 @@
          border: none;
      } 
 
+    .buttonContainer{
+        position: absolute;
+        top: 65%;
+        left: 25%;
+        width: auto;
+    }
+
+    
+    .arrowContainer{
+        position: absolute;
+        top: 52%;
+        left: 0;
+      
+    }
+
+    .imgArrow{
+        border: none; 
+        height: 400px;
+        width: 7-0px;
+      }
      
     .boton-save {
-        width: 500px;
-        height: 280px;
-        border-radius: 40px;
-        font-size: 70px;
+        text-align: center;
+        padding: 1em;
+        border: 0.2em solid rgba(0, 0, 0, 0.186);
+        width: 22.5em;
+        height: 22.5em;
+        border-radius: 100%;
         margin-bottom: auto;
-        margin-inline-start: 50%;
-        border-color: rgba(0, 0, 0, 0.393);
-        border: 5px solid #0b1b16b4;
-        background-color: rgba(252, 251, 251, 0.747);
-      }
-
-    .buttonContainer{
-         position: absolute;
-         top: 75%;
-         left: 0%;
-         width: auto;
+        margin-inline-start: 100%;
+        font-size: 1em;
+        animation: breathing 1s ease-out infinite normal;
     }
+
+    @keyframes breathing {
+  0% {
+    -webkit-transform: scale(0.9);
+    -ms-transform: scale(0.9);
+    transform: scale(0.9);
+  }
+
+  50% {
+    -webkit-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1);
+  }
+
+  100% {
+    -webkit-transform: scale(0.9);
+    -ms-transform: scale(0.9);
+    transform: scale(0.9);
+  }
+}
 
     .slideContainer{
          position: absolute;
-         top: 60%;
+         top: 77%;
          width:600px;
     }
 
@@ -157,18 +207,18 @@
           float:left; 
       }
 
-      .container-general{
-        width: 100%;
-        height: 100%;
-        align-items: center;
-        flex-direction: column;
-      }
+    .container-general{
+          width: 100%;
+          height: 100%;
+          align-items: center;
+          flex-direction: column;
+    }
 
-      .back-to-uat-container{
+    .back-to-uat-container{
           width: 100%;
           margin: 100px;
           margin-left: 240px;
-      }
+    }
 
     </style>
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
@@ -236,9 +286,18 @@
       </div>
     </div>
    </div> 
-   <img src="" id="img" alt=""></img>
+
+   <div class="qrContainer">
+    <img src="" id="qr" alt=""></img>
+   </div>
+
+   <div class="arrowContainer">
+    <img class="imgArrow" src="thumbs/miraaqui.png">
+   </div>
+   
     <div class="buttonContainer">
-      <button id="download-photo" class="boton-save" display="none">Tomar Foto</button>
+      <button id="download-photo" class="boton-save" display="none"></button>
+
       <div>
         <button id="back-to-filters">Back</button>
       </div>

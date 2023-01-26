@@ -1,4 +1,3 @@
-
 const urlDns = "https://alfred.to";
 
 const vikingBtn = document.getElementById("filterViking");
@@ -11,7 +10,7 @@ const hopeBtn = document.getElementById("filterHope");
 const vendettaBtn = document.getElementById("filterVendetta");
 const fireBtn = document.getElementById("filterFire");
 const devilBtn = document.getElementById("filterDevil");
-const qrImgDonwload = document.getElementById("img");
+const qrImgDonwload = document.getElementById("qr");
 
 var effects = [
   "./effects/viking_helmet.deepar",
@@ -111,7 +110,7 @@ if (window.innerWidth > window.innerHeight) {
 let imageScreenShoot = null;
 deepAR.callbacks.onScreenshotTaken = function (photo) {
   console.log("photo screenshot", photo);
-  
+
   var a = document.createElement("a");
   a.href = photo;
   a.setAttribute("id", "Div1");
@@ -119,15 +118,14 @@ deepAR.callbacks.onScreenshotTaken = function (photo) {
   document.body.appendChild(a);
   a.click();
   console.log(photo);
-  imageScreenShoot = photo
+  imageScreenShoot = photo;
   deepAR.resume();
-  qrDisplayed()
- 
+  qrDisplayed();
 };
 
-function qrDisplayed (){
-if (imageScreenShoot !== null) {
-    console.log('imageScreenShoot after cvallback', imageScreenShoot)
+function qrDisplayed() {
+  if (imageScreenShoot !== null) {
+    console.log("imageScreenShoot after cvallback", imageScreenShoot);
 
     const requestOptions = {
       method: "POST",
@@ -145,16 +143,10 @@ if (imageScreenShoot !== null) {
       .then((data) => {
         var urlCreator = window.URL || window.webkitURL;
         var imageURL = urlCreator.createObjectURL(data);
-        document.querySelector("#img").src = imageURL;
+        document.querySelector("#qr").src = imageURL;
       });
   }
-
 }
-
-
-
-  
-
 
 //---- CODE SCREENSHOT
 
@@ -163,7 +155,7 @@ document.getElementById("download-photo").onclick = function () {
     deepAR.takeScreenshot();
     qrImgDonwload.style.display = "block";
     console.log("Foto recibida");
-  }, 3000);
+  }, 100);
 };
 
 $(document).ready(function () {
@@ -178,7 +170,7 @@ $(document).ready(function () {
     touchMove: true,
   });
 
-  const qrImgDonwload = document.getElementById("img");
+  const qrImgDonwload = document.getElementById("qr");
 
   function backtoFiltersBack() {
     backToFilterCarousel.style.display = "block";
@@ -206,7 +198,6 @@ $(document).ready(function () {
 
   //VIKING FILTER
 
-
   //STALLONE FILTER
 
   //PING-PONG FILTER
@@ -215,7 +206,6 @@ $(document).ready(function () {
 
   //SNAIL FILTER
 
- 
   //VENDETTA FILTER
 
   //FIRE FILTER
