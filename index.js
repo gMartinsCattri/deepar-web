@@ -1,27 +1,29 @@
 const urlDns = "https://alfred.to";
 
 const vikingBtn = document.getElementById("filterViking");
-const makeupBtn = document.getElementById("filterMakeUp");
+const eaglesBtn = document.getElementById("filterEagle");
+const chiefBtn = document.getElementById("filterChief");
+const oscaresBtn = document.getElementById("filterOscares");
 const staloneBtn = document.getElementById("filterStalone");
 const pingPongBtn = document.getElementById("filterPingPong");
-const heartsBtn = document.getElementById("filterHearts");
-const snailBtn = document.getElementById("filterSnail");
-const hopeBtn = document.getElementById("filterHope");
-const vendettaBtn = document.getElementById("filterVendetta");
-const fireBtn = document.getElementById("filterFire");
 const devilBtn = document.getElementById("filterDevil");
+const heartsBtn = document.getElementById("filterHearts");
+const hopeBtn = document.getElementById("filterHope");
+const snailBtn = document.getElementById("filterSanta");
+const fireBtn = document.getElementById("filterFire");
 const qrImgDonwload = document.getElementById("qr");
 
 var effects = [
-  "./effects/viking_helmet.deepar",
+  "./effects/Neon_Devil_Horns.deepar",
+  "./effects/eagles_sb.deepar",
+  "./effects/chiefs_sb.deepar",
+  "./effects/Oscar.deepar",
   "./effects/Stallone.deepar",
   "./effects/Ping_Pong.deepar",
-  "./effects/Oscar.deepar",
-  "./effects/Neon_Devil_Horns.deepar",
+  "./effects/viking_helmet.deepar",
   "./effects/Pixel_Hearts.deepar",
   "./effects/Hope.deepar",
   "./effects/SantAR.deepar",
-  "./effects/Vendetta_Mask.deepar",
   "./effects/Fire_Effect.deepar",
 ];
 
@@ -195,20 +197,4 @@ $(document).ready(function () {
     qrImgDonwload.style.display = "none";
   }
   backToFilterCarousel.addEventListener("click", backToFilters);
-
-  //VIKING FILTER
-
-  //STALLONE FILTER
-
-  //PING-PONG FILTER
-
-  //HEARTS FILTER
-
-  //SNAIL FILTER
-
-  //VENDETTA FILTER
-
-  //FIRE FILTER
-
-  //DEVIL HORNS FILTER
 });
