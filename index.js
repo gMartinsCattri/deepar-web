@@ -104,7 +104,7 @@ deepAR.callbacks.onVideoStarted = function () {
 //---- Position the carousel to cover the canvas
 
 if (window.innerWidth > window.innerHeight) {
-  var width = Math.floor(window.innerHeight * 0.66);
+  var width = Math.floor(window.innerHeight * 0.6);
   var carousel = document.getElementsByClassName("effect-carousel")[0];
   carousel.style.width = width + "px";
 }
