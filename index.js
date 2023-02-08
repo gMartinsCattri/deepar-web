@@ -40,7 +40,8 @@ canvas.width = canvasWidth;
 canvas.height = canvasHeight;
 
 var deepAR = new DeepAR({
-  licenseKey: "your_license_key_goes_here",
+  licenseKey:
+    "ba2fa173d55c0113189bed5b3a0c1fd5a5ae576437458efc241c63070be3a128bffe401ab3b01be1",
   canvas: canvas,
   segmentationConfig: {
     modelPath: "lib/models/segmentation/segmentation-160x160-opt.bin",
@@ -174,19 +175,19 @@ $(document).ready(function () {
 
   const qrImgDonwload = document.getElementById("qr");
 
-  function backtoFiltersBack() {
-    backToFilterCarousel.style.display = "block";
-  }
+  // function backtoFiltersBack() {
+  //   backToFilterCarousel.style.display = "block";
+  // }
 
-  const dowloadPhoto = document.getElementById("download-photo");
-  function hideDowloadPhoto() {
-    dowloadPhoto.style.display = "block";
-  }
+  //const dowloadPhoto = document.getElementById("download-photo");
+  //function hideDowloadPhoto() {
+  // dowloadPhoto.style.display = "block";
+  //}
 
-  const filterCarousel = document.getElementById("filterCarousel");
-  function hideFilterCarousel() {
-    filterCarousel.style.display = "none";
-  }
+  //  const filterCarousel = document.getElementById("filterCarousel");
+  //  function hideFilterCarousel() {
+  //    filterCarousel.style.display = "none";
+  //  }
 
   const backToFilterCarousel = document.getElementById("back-to-filters");
   function backToFilters() {
