@@ -41,6 +41,7 @@ canvas.height = canvasHeight;
 
 var deepAR = new DeepAR({
   licenseKey:
+    // "2e28bc96e1e3776f33925abc071009ea1236bfb2df308363a25a329cee129da87112778bc3259822",
     "ba2fa173d55c0113189bed5b3a0c1fd5a5ae576437458efc241c63070be3a128bffe401ab3b01be1",
   canvas: canvas,
   segmentationConfig: {
