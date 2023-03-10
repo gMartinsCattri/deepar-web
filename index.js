@@ -25,6 +25,8 @@ var effects = [
   "./effects/Hope.deepar",
   "./effects/SantAR.deepar",
   "./effects/Fire_Effect.deepar",
+  "./effects/kawsfiltro.deepar",
+  "./effects/deweyfiltro.deepar",
 ];
 
 function applyEffect(index) {
