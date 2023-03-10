@@ -1,14 +1,32 @@
+const urlDns = "https://alfred.to";
+
+const vikingBtn = document.getElementById("filterViking");
+const eaglesBtn = document.getElementById("filterEagle");
+const chiefBtn = document.getElementById("filterChief");
+const oscaresBtn = document.getElementById("filterOscares");
+const staloneBtn = document.getElementById("filterStalone");
+const pingPongBtn = document.getElementById("filterPingPong");
+const devilBtn = document.getElementById("filterDevil");
+const heartsBtn = document.getElementById("filterHearts");
+const hopeBtn = document.getElementById("filterHope");
+const snailBtn = document.getElementById("filterSanta");
+const fireBtn = document.getElementById("filterFire");
+const qrImgDonwload = document.getElementById("qr");
+
 var effects = [
-  "./effects/viking_helmet.deepar",
+  "./effects/Neon_Devil_Horns.deepar",
+  "./effects/eagles_sb.deepar",
+  "./effects/chiefs_sb.deepar",
+  "./effects/Oscar.deepar",
   "./effects/Stallone.deepar",
   "./effects/Ping_Pong.deepar",
-  "./effects/Oscar.deepar",
-  "./effects/Neon_Devil_Horns.deepar",
+  "./effects/viking_helmet.deepar",
   "./effects/Pixel_Hearts.deepar",
   "./effects/Hope.deepar",
   "./effects/SantAR.deepar",
-  "./effects/Vendetta_Mask.deepar",
   "./effects/Fire_Effect.deepar",
+  "./effects/kawsfiltro.deepar",
+  "./effects/deweyfiltro.deepar",
 ];
 
 function applyEffect(index) {
@@ -24,7 +42,9 @@ canvas.width = canvasWidth;
 canvas.height = canvasHeight;
 
 var deepAR = new DeepAR({
-  licenseKey: "your_license_key_goes_here",
+  licenseKey:
+    // "2e28bc96e1e3776f33925abc071009ea1236bfb2df308363a25a329cee129da87112778bc3259822",
+    "ba2fa173d55c0113189bed5b3a0c1fd5a5ae576437458efc241c63070be3a128bffe401ab3b01be1",
   canvas: canvas,
   segmentationConfig: {
     modelPath: "lib/models/segmentation/segmentation-160x160-opt.bin",
@@ -87,15 +107,16 @@ deepAR.callbacks.onVideoStarted = function () {
 //---- Position the carousel to cover the canvas
 
 if (window.innerWidth > window.innerHeight) {
-  var width = Math.floor(window.innerHeight * 0.66);
+  var width = Math.floor(window.innerHeight * 0.6);
   var carousel = document.getElementsByClassName("effect-carousel")[0];
   carousel.style.width = width + "px";
 }
 
 //---- SCREENSHOT
-
+let imageScreenShoot = null;
 deepAR.callbacks.onScreenshotTaken = function (photo) {
   console.log("photo screenshot", photo);
+
   var a = document.createElement("a");
   a.href = photo;
   a.setAttribute("id", "Div1");
@@ -103,16 +124,44 @@ deepAR.callbacks.onScreenshotTaken = function (photo) {
   document.body.appendChild(a);
   a.click();
   console.log(photo);
-  setImageScreenShoot(photo);
+  imageScreenShoot = photo;
   deepAR.resume();
+  qrDisplayed();
 };
+
+function qrDisplayed() {
+  if (imageScreenShoot !== null) {
+    console.log("imageScreenShoot after cvallback", imageScreenShoot);
+
+    const requestOptions = {
+      method: "POST",
+      headers: {
+        Authorization:
+          "Basic QWxmcmVkOlREODI0MThZYlBweCpuWDV4WDNrSlRrVFNeRTZndQ==",
+      },
+      body: imageScreenShoot,
+    };
+    fetch(
+      "https://alfred.to/reservas/qr-code/go-to-your-picture",
+      requestOptions
+    )
+      .then((response) => response.blob())
+      .then((data) => {
+        var urlCreator = window.URL || window.webkitURL;
+        var imageURL = urlCreator.createObjectURL(data);
+        document.querySelector("#qr").src = imageURL;
+      });
+  }
+}
 
 //---- CODE SCREENSHOT
 
 document.getElementById("download-photo").onclick = function () {
-  deepAR.takeScreenshot();
-  qrImgDonwload.style.display = "block";
-  deepAR.resume();
+  setTimeout(() => {
+    deepAR.takeScreenshot();
+    qrImgDonwload.style.display = "block";
+    console.log("Foto recibida");
+  }, 100);
 };
 
 $(document).ready(function () {
@@ -127,21 +176,21 @@ $(document).ready(function () {
     touchMove: true,
   });
 
-  const qrImgDonwload = document.getElementById("img");
+  const qrImgDonwload = document.getElementById("qr");
 
-  function backtoFiltersBack() {
-    backToFilterCarousel.style.display = "block";
-  }
+  // function backtoFiltersBack() {
+  //   backToFilterCarousel.style.display = "block";
+  // }
 
-  const dowloadPhoto = document.getElementById("download-photo");
-  function hideDowloadPhoto() {
-    dowloadPhoto.style.display = "block";
-  }
+  //const dowloadPhoto = document.getElementById("download-photo");
+  //function hideDowloadPhoto() {
+  // dowloadPhoto.style.display = "block";
+  //}
 
-  const filterCarousel = document.getElementById("filterCarousel");
-  function hideFilterCarousel() {
-    filterCarousel.style.display = "none";
-  }
+  //  const filterCarousel = document.getElementById("filterCarousel");
+  //  function hideFilterCarousel() {
+  //    filterCarousel.style.display = "none";
+  //  }
 
   const backToFilterCarousel = document.getElementById("back-to-filters");
   function backToFilters() {
@@ -152,50 +201,4 @@ $(document).ready(function () {
     qrImgDonwload.style.display = "none";
   }
   backToFilterCarousel.addEventListener("click", backToFilters);
-
-  //VIKING FILTER
-
-  //MAKEUP FILTER
-  makeupBtn.addEventListener("click", () => {
-    const effect = effects[1];
-    hideFilterCarousel();
-    console.log("vikins click");
-    fotoTimerMessage();
-    hideDowloadPhoto();
-    backtoFiltersBack();
-    deepAR.switchEffect(0, "slot", effect);
-  });
-  //STALLONE FILTER
-
-  //PING-PONG FILTER
-
-  //HEARTS FILTER
-
-  //SNAIL FILTER
-  snailBtn.addEventListener("click", () => {
-    const effect = effects[5];
-    hideFilterCarousel();
-    console.log("vikins click");
-    fotoTimerMessage();
-    hideDowloadPhoto();
-    backtoFiltersBack();
-    deepAR.switchEffect(0, "slot", effect);
-  });
-  //HOPE FILTER
-
-  function some() {
-    console.log("vikins click");
-    const effect = effects[2];
-    hideFilterCarousel();
-
-    fotoTimerMessage();
-    hideDowloadPhoto();
-    backtoFiltersBack();
-    deepAR.switchEffect(0, "slot", effect);
-  }
-  //VENDETTA FILTER
-
-  //FIRE FILTER
-
-  //DEVIL HORNS FILTER
 });
