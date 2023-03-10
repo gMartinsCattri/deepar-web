@@ -65,7 +65,7 @@ var deepAR = new DeepAR({
       deepAR.switchEffect(
         0,
         "slot",
-        "./effects/Neon_Devil_Horns.deepar",
+        "./effects/deweyfiltro.deepar",
         function () {
           // effect loaded
         }
