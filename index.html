@@ -110,14 +110,32 @@
 
     .qrContainer{
         position: absolute;
-        top: 30%;
-        left: 35%;
-        width: 800px;
-        height: 800px;
+        top: 64%;
+        left: 8%;
+        width: 500px;
+        height: 500px;
+        z-index: 10;
         display: block;
        
     }
+    #back-to-camera{
+      width:500px;
+      height: 300px;
+    }
 
+    #static-image-container{
+      position: absolute;
+      width: 1500px;
+      height: 2500px;
+      top: 620px;
+      left: 300px;
+      transform: rotate(-8deg);
+    }
+
+    #staticImage{
+      width: 100%;
+      height: 100%;
+    }
     #qr {
         height: 700px;
         width: 700px;
@@ -304,8 +322,15 @@
     <img src="" id="qr" alt=""></img>
    </div>
 
+   <div id="static-image-container">
+    <img src="" id="staticImage" alt="">
+   </div>
+
    <div class="arrowContainer">
-    <img class="imgArrow" src="thumbs/miraaqui.png">
+    <img class="imgArrow" id='arrow' src="thumbs/miraaqui.png">
+   </div>
+   <div>
+    <button id="back-to-camera">Regressar</button>
    </div>
    
     <div class="buttonContainer">

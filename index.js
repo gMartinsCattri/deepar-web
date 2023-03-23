@@ -12,6 +12,7 @@ const hopeBtn = document.getElementById("filterHope");
 const snailBtn = document.getElementById("filterSanta");
 const fireBtn = document.getElementById("filterFire");
 const qrImgDonwload = document.getElementById("qr");
+const backToCamera = document.getElementsByClassName('back-to-camera')
 
 var effects = [
   "./effects/Neon_Devil_Horns.deepar",
@@ -116,6 +117,13 @@ if (window.innerWidth > window.innerHeight) {
 let imageScreenShoot = null;
 deepAR.callbacks.onScreenshotTaken = function (photo) {
   console.log("photo screenshot", photo);
+  document.querySelector("#staticImage").src = photo;
+  document.getElementById("static-image-container").style.display = "block";
+  document.getElementById("arrow").style.display = "none";
+  document.querySelector(".slick-slider").style.display = "none";
+  document.getElementById("deepar-canvas").style.display = "none";
+  document.getElementById("download-photo").style.display = "none";
+
 
   var a = document.createElement("a");
   a.href = photo;
@@ -160,9 +168,18 @@ document.getElementById("download-photo").onclick = function () {
   setTimeout(() => {
     deepAR.takeScreenshot();
     qrImgDonwload.style.display = "block";
-    console.log("Foto recibida");
+    console.log("Foto recibidasssssssss", qrImgDonwload);
   }, 100);
 };
+document.getElementById('back-to-camera').onclick = function(){
+  console.log('back to camera')
+  document.getElementById("static-image-container").style.display = "none";
+  document.getElementById("arrow").style.display = "block";
+  document.querySelector(".slick-slider").style.display = "block";
+  document.getElementById("deepar-canvas").style.display = "block";
+  document.getElementById("download-photo").style.display = "block";
+}
+
 
 $(document).ready(function () {
   $(".effect-carousel").slick({
