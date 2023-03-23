@@ -110,10 +110,10 @@
 
     .qrContainer{
         position: absolute;
-        top: 64%;
-        left: 8%;
-        width: 500px;
-        height: 500px;
+        top: 65% !important;
+        left: 8% !important;
+        width: 500px !important;
+        height: 500px !important;
         z-index: 10;
         display: block;
        
@@ -130,15 +130,17 @@
       top: 620px;
       left: 300px;
       transform: rotate(-8deg);
+      display: none;
     }
 
     #staticImage{
       width: 100%;
       height: 100%;
+      
     }
     #qr {
-        height: 700px;
-        width: 700px;
+        height: 500px !important;
+        width: 500px !important;
         display: none;
         border: 10px;
     }
@@ -331,7 +333,7 @@
     <img class="imgArrow" id='arrow' src="thumbs/miraaqui.png">
    </div>
    <div>
-    <button id="back-to-camera" style="display: none">Regressar</button>
+    <button id="back-to-camera" style="display: none"><img src="./hazlodenuevo.svg" alt=""></button>
    </div>
    
     <div class="buttonContainer">

@@ -125,6 +125,9 @@ deepAR.callbacks.onScreenshotTaken = function (photo) {
   document.getElementById("download-photo").style.display = "none";
   document.getElementById("back-to-camera").style.display = "block";
   document.getElementById("qr").style.display = "block";
+  document.getElementById("static-image-container").style.display = "block";
+
+  
   var a = document.createElement("a");
   a.href = photo;
   a.setAttribute("id", "Div1");
