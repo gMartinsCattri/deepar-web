@@ -140,7 +140,7 @@ deepAR.callbacks.onScreenshotTaken = function (photo) {
   qrDisplayed();
 };
 
-function qrDisplayed() {
+async function qrDisplayed() {
   if (imageScreenShoot !== null) {
     console.log("imageScreenShoot after cvallback", imageScreenShoot);
 
@@ -152,18 +152,21 @@ function qrDisplayed() {
       },
       body: imageScreenShoot,
     };
-    fetch(
-      "https://alfred.to/reservas/qr-code/go-to-your-picture",
-      requestOptions
-    )
-      .then((response) => response.blob())
-      .then((data) => {
-        var urlCreator = window.URL || window.webkitURL;
-        var imageURL = urlCreator.createObjectURL(data);
-        document.querySelector("#qr").src = imageURL;
-      });
+    try {
+      const response = await fetch(
+        "https://alfred.to/reservas/qr-code/go-to-your-picture",
+        requestOptions
+      );
+      const data = await response.blob();
+      var urlCreator = window.URL || window.webkitURL;
+      var imageURL = urlCreator.createObjectURL(data);
+      document.querySelector("#qr").src = imageURL;
+    } catch (error) {
+      console.error(error);
+    }
   }
 }
+
 
 //---- CODE SCREENSHOT
 
