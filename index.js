@@ -123,8 +123,8 @@ deepAR.callbacks.onScreenshotTaken = function (photo) {
   document.querySelector(".slick-slider").style.display = "none";
   document.getElementById("deepar-canvas").style.display = "none";
   document.getElementById("download-photo").style.display = "none";
-
-
+  document.getElementById("back-to-camera").style.display = "block";
+  document.getElementById("qr").style.display = "block";
   var a = document.createElement("a");
   a.href = photo;
   a.setAttribute("id", "Div1");
@@ -178,6 +178,7 @@ document.getElementById('back-to-camera').onclick = function(){
   document.querySelector(".slick-slider").style.display = "block";
   document.getElementById("deepar-canvas").style.display = "block";
   document.getElementById("download-photo").style.display = "block";
+  document.getElementById("qr").style.display = "none";
 }
 
 
